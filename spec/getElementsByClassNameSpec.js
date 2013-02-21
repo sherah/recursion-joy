@@ -5,6 +5,7 @@ var htmlStrings = [
   "<p><p class='targetClassName'><p class='targetClassName'></p></p></p>",
   "<p><p></p><p><p class='targetClassName'></p></p></p>",
   "<p><p class='targetClassName'></p><p class='targetClassName'></p></p>",
+  "<p><div class='somediv'><div class='innerdiv'><span class='targetClassName'>yay</span></div></div></p>"
 ];
 
 describe("getElementsByClassName", function(){
@@ -15,9 +16,9 @@ describe("getElementsByClassName", function(){
       $("body").append($rootElement);
       
       var result = getElementsByClassName("targetClassName");
-      var expected = document.getElementsByClassName("targetClassName");
-      console.log(result)
-      var equality = _.isEqual(result, expected); // why can't we use `===` here?
+      var expectedNodeList = document.getElementsByClassName("targetClassName");
+      var expectedArray = Array.prototype.slice.apply(expectedNodeList);
+      var equality = _.isEqual(result, expectedArray); // why can't we use `===` here?
       expect(equality).toBeTruthy();
 
       $rootElement.remove();
